@@ -5,7 +5,7 @@ import TrackerApp from '../Components/TrackerApp';
 const TrackerScreen = () =>{
     return(
         <div>
-            <TrackerApp/>
+            <TrackerApp inningns={"1st Inningns"}/>
         </div>
     )
 }

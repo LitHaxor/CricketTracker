@@ -5,6 +5,7 @@ function HomeScreen() {
     return(
         <div>
             <HomeMain/>
+            
         </div>
     )
         

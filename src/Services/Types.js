@@ -6,3 +6,4 @@ export const decrementBalls = 'DecrementBall';
 export const decrementWickets = 'DecrementWicket';
 export const incrementOvers = 'incrementOver';
 export const decrementOvers = 'decrementOver';
+export const lastRuns =  'lastRuns';

@@ -12,9 +12,11 @@ const HomeMain= ()=>{
                 <p>To use this app click on launch  app.</p>
                 <p class="lead justify-content-center">
                     <a class="btn btn-outline-success btn-lg" href="/TrackerApps" role="button">Launch APP</a>
+                    
                 </p>
             </div>
         </div>
+        
     )
 }
 
