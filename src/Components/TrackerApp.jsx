@@ -5,6 +5,7 @@ import { incrementBall, decrementBall}  from '../Services/Actions/CountBalls';
 import {decrementWicket,incrementWicket} from '../Services/Actions/CountWicket';
 import {decrementOver,incrementOver} from '../Services/Actions/countOver';
 import {lastRun} from '../Services/Actions/lastRun';
+import { Modal } from "react-bootstrap";
 import OverModal from './OverModal';
 
 
@@ -13,6 +14,10 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
   
     let [stk,setStk] = useState([]);
     const [target, setTarget] = useState(0);
+    const [show,setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     function overUp(){
         if(balls === 5)
         {
@@ -24,6 +29,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
 
     function handleMatch(run)
     {
+        
        switch (run) {
            case 'NB':
                incrementRun(1);
@@ -39,6 +45,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                 overUp();
                 break;
             case 'rv':
+                
                 switch (stk[stk.length -1]) {
                     case 'NB':
                         DecrementRun(1);
@@ -59,10 +66,14 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                         stk.pop();
                         break;
                     default:
+                        if((balls === 0 &&  over ===0) || (!stk[stk.length -1 ] === 'NB' && !stk[stk.length -1 ] === 'wd') )
+                           { 
+                               break;
+                            }
                         DecrementRun(stk[stk.length -1]);
                         if(balls === 0 && over !== 0){
                             decrementOver(1);
-                            incrementBall(6);
+                            incrementBall(5);
                             stk.pop(); break;
                         }
                         decrementBall(1);
@@ -152,7 +163,21 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                             <button className="btn btn-primary" onClick ={()=> handleMatch('rv',0,0)}>Review Decision</button>
                         </div>
                         <div className="button-group">
-                            <button className="btn btn-danger" onClick={()=>second()}>Finish Innings</button>
+                            <button className="btn btn-danger" onClick={()=>handleShow()}>Finish Innings</button>
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                <Modal.Title>Finish innings</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+
+                                  <h3 className="text-left text-danger"> Sure you want to finish the Match?</h3>
+
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <button className="btn btn-info" onClick={()=>{handleClose()}}>No</button>
+                                    <button className="btn btn-danger" onClick={()=> {handleClose();second();}}>Yes</button>
+                                </Modal.Footer>
+                            </Modal>
                         </div>
                         <OverModal />
                     </div>
