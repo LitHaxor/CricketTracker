@@ -12,13 +12,13 @@ const OverModal = ({lastRun, last}) =>{
     }
     return(
         <div>
-       <div className="btn btn-outline-danger" onClick={()=> handleShow()}>
+       <div className="btn btn-outline-info" onClick={()=> handleShow()}>
            Set Over
        </div>
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Set Overs</Modal.Title>
             </Modal.Header>
             <Modal.Body>
 
@@ -31,7 +31,7 @@ const OverModal = ({lastRun, last}) =>{
 
             </Modal.Body>
             <Modal.Footer>
-                <button className="btn btn-success" onClick={()=> {handleClose(); handleOver();}}>Done</button>
+                <button className="btn btn-success" onClick={()=> {handleClose(); handleOver();}}>Set</button>
             </Modal.Footer>
         </Modal>
         </div>

@@ -151,10 +151,10 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                         <div className="button-group">
                             <button className="btn btn-primary" onClick ={()=> handleMatch('rv',0,0)}>Review Decision</button>
                         </div>
-                        <OverModal />
                         <div className="button-group">
                             <button className="btn btn-danger" onClick={()=>second()}>Finish Innings</button>
                         </div>
+                        <OverModal />
                     </div>
                 </div>
             </div>
