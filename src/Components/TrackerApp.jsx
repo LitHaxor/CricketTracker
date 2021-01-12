@@ -195,7 +195,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                         <h2 className="text-danger text-center">Target: {target}</h2>
                         <h3 className="text-center">RUNS: {runs}/{wicket}</h3>
                         <h5 className="text-center">{`Over: ${over},${balls} (${last}) `}</h5>
-                        <p className="text-center alert alert-danger" >{`${target-runs} runs to win from ${last*6 - ((over*6 )+balls)} balls`}</p>
+                        <h6 className="text-center alert alert-danger" ><span className="text-info">{target -runs} runs</span>  to win from <span className="text-success">{(last*6)- ((over*6)+ balls) } balls</span></h6>
                     </div>
                     <div className="card-body d-flex justify-content-around">
                         <div className="button-group">
