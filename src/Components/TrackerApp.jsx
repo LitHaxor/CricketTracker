@@ -5,6 +5,7 @@ import { incrementBall, decrementBall}  from '../Services/Actions/CountBalls';
 import {decrementWicket,incrementWicket} from '../Services/Actions/CountWicket';
 import {decrementOver,incrementOver} from '../Services/Actions/countOver';
 import {lastRun} from '../Services/Actions/lastRun';
+import OverModal from './OverModal';
 
 
 
@@ -13,9 +14,8 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
     const [isWide, setWide] = useState(false);
     const [isNo, setNo] = useState(false);
     const [isWicked, setIsWicked] = useState(false);
-    let [stk] = useState([]);
+    let [stk,setStk] = useState([]);
     const [target, setTarget] = useState(0);
-    let [require] = useState();
     function overUp(){
         if(balls === 5)
         {
@@ -79,7 +79,6 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
        }
        stk.push(run);
        setNo(false); setWide(false);setIsWicked(false);
-       lastRun(run);
        incrementRun(run);
        overUp();
        console.log(stk);
@@ -91,9 +90,9 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
         decrementOver(over);
         decrementBall(balls);
         DecrementRun(runs);
-        for(let i=0; i<= stk.length ; i++)
-            stk.pop();
-        stk.pop();
+        setStk([]);
+        
+        
     }
 
     if(target === 0){
@@ -156,8 +155,9 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                     <hr className="my-4"/>
                     <div className="card-body d-flex justify-content-around flex-wrap">
                         <div className="button-group">
-                            <button className="btn btn-primary" onClick ={()=> handleMatch('rv',0,0)}>Review Decesion</button>
+                            <button className="btn btn-primary" onClick ={()=> handleMatch('rv',0,0)}>Review Decision</button>
                         </div>
+                        <OverModal />
                         <div className="button-group">
                             <button className="btn btn-danger" onClick={()=>second()}>Finish Innings</button>
                         </div>
@@ -175,8 +175,8 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                     <div className="card-body">
                         <h2 className="text-danger text-center">Target: {target}</h2>
                         <h3 className="text-center">RUNS: {runs}/{wicket}</h3>
-                        <h5 className="text-center">Over: {over},{balls}</h5>
-                        <p className="text-center" >{target-runs} runs of {require}</p>
+                        <h5 className="text-center">{`Over: ${over},${balls} (${last}) `}</h5>
+                        <p className="text-center alert alert-danger" >{`${target-runs} runs to win from ${last*6 - ((over*6 )+balls)} balls`}</p>
                     </div>
                     <div className="card-body d-flex justify-content-around">
                         <div className="button-group">
@@ -231,7 +231,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                         </div>
 
                         <div className="button-group">
-                            <button className="btn btn-danger" onClick={()=>second()}>Finish Innings</button>
+                            <button className="btn btn-success" onClick={()=>second()}>Finish Match</button>
                         </div>
                     </div>
                 </div>
@@ -245,6 +245,7 @@ const mapStateToProps = (state, ownProps) =>({
     balls: state.BallsReducer.balls,
     over: state.OverReducer.over,
     wicket: state.WicketReducer.wicket,
+    last: state.LastRunReducer.last,
     props: ownProps
 })
 

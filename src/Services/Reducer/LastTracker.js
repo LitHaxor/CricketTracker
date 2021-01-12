@@ -1,7 +1,7 @@
 import {lastRuns} from '../Types';
 
 const initalState = {
-    last: []
+    last: 0
 }
 
 const LastRunReducer = (state = initalState, action) =>{
