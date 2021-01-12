@@ -95,6 +95,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
         decrementOver(over);
         decrementBall(balls);
         DecrementRun(runs);
+        decrementWicket(wicket);
         setStk([]);
         
         
