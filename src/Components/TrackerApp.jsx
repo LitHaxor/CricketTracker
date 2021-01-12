@@ -9,11 +9,8 @@ import OverModal from './OverModal';
 
 
 
-const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBall,lastRun, decrementWicket, incrementWicket, decrementOver, incrementOver,over, balls, wicket, runs,props })=> {
+const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBall, decrementWicket, incrementWicket, decrementOver, incrementOver,over, balls, wicket, runs,props })=> {
   
-    const [isWide, setWide] = useState(false);
-    const [isNo, setNo] = useState(false);
-    const [isWicked, setIsWicked] = useState(false);
     let [stk,setStk] = useState([]);
     const [target, setTarget] = useState(0);
     function overUp(){
@@ -27,62 +24,58 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
 
     function handleMatch(run)
     {
-       if(run === 'NB')
-       {
-           setNo(true); setWide(false);
-           incrementRun(1);
-           stk.push(run);
-           return;
-       } 
-       if(run === 'wd'){
-            setWide(true); setNo(false);
-            incrementRun(1);
-            stk.push(run);
-            return;
+       switch (run) {
+           case 'NB':
+               incrementRun(1);
+               stk.push('NB');
+               break;
+            case 'wd':
+                incrementRun(1);
+                stk.push('wd');
+                break;
+            case 'W':
+                incrementWicket(1);
+                stk.push('W');
+                overUp();
+                break;
+            case 'rv':
+                switch (stk[stk.length -1]) {
+                    case 'NB':
+                        DecrementRun(1);
+                        stk.pop();
+                        break;
+                    case 'wd':
+                        DecrementRun(1);
+                        stk.pop();
+                        break;
+                    case 'W':
+                        decrementWicket(1);
+                        if(balls === 0 && over !== 0){
+                            decrementOver(1);
+                            incrementBall(6);
+                            stk.pop(); break;
+                        }
+                        decrementBall(1);
+                        stk.pop();
+                        break;
+                    default:
+                        DecrementRun(stk[stk.length -1]);
+                        if(balls === 0 && over !== 0){
+                            decrementOver(1);
+                            incrementBall(6);
+                            stk.pop(); break;
+                        }
+                        decrementBall(1);
+                        stk.pop();
+                        break;
+                }
+                break;
+           default:
+               incrementRun(run);
+               overUp();
+               stk.push(run);
+               break;
        }
-       if(run === 'W')
-       {
-        setIsWicked(true); setNo(false);setWide(false);
-         if(isNo !== true)
-            incrementWicket(1);
-         overUp();
-         stk.push(run);
-         return;
-       }
-       if( run === 'rv')
-       {
-         if(balls === 0 && over ===0)
-            return;
-         if(isWicked)
-         {
-             stk.pop();
-             decrementWicket(1);
-             if(isNo || isWide)
-            {
-                decrementBall(0);
-            }
-            else{
-                decrementBall(1);
-             }
-            return;
-         }
-         if(isNo || isWide)
-         {
-             decrementBall(0);
-         }
-         else{
-             decrementBall(1);
-         }
-         if(!isNaN(parseInt(stk[stk.length -1])))
-            DecrementRun(stk[stk.length-1]);
-         stk.pop();
-         return;
-       }
-       stk.push(run);
-       setNo(false); setWide(false);setIsWicked(false);
-       incrementRun(run);
-       overUp();
-       console.log(stk);
     }
 
     function second(){
@@ -232,7 +225,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                         </div>
 
                         <div className="button-group">
-                            <button className="btn btn-success" onClick={()=>second()}>Finish Match</button>
+                            <a href="/TrackerApps" role="button" className="btn btn-success" >Finish Match</a>
                         </div>
                     </div>
                 </div>
