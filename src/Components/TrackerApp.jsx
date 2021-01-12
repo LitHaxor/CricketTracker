@@ -40,7 +40,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
             stk.push(run);
             return;
        }
-       if(run === 'w')
+       if(run === 'W')
        {
         setIsWicked(true); setNo(false);setWide(false);
          if(isNo !== true)
@@ -55,6 +55,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
             return;
          if(isWicked)
          {
+             stk.pop();
              decrementWicket(1);
              if(isNo || isWide)
             {
@@ -135,7 +136,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                             <button className="btn btn-primary rounded-circle" onClick={()=>handleMatch(6)}>6</button>
                         </div>
                         <div className="button-group">
-                            <button className="btn btn-outline-danger rounded-circle" onClick={()=>{handleMatch('w')}}>W</button>
+                            <button className="btn btn-outline-danger rounded-circle" onClick={()=>{handleMatch('W')}}>W</button>
                         </div>
     
                     </div>
@@ -145,7 +146,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                             {
                                 stk.map((s)=>
                                 (
-                                    <div className="badge badge-info margin-1p">{s}</div>
+                                    <div className={`badge badge-${s} margin-1p`}>{s}</div>
                                 )
                                 )
                             }
@@ -207,7 +208,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                             <button className="btn btn-primary rounded-circle" onClick={()=>handleMatch(6)}>6</button>
                         </div>
                         <div className="button-group">
-                            <button className="btn btn-outline-danger rounded-circle" onClick={()=>{handleMatch('w')}}>W</button>
+                            <button className="btn btn-outline-danger rounded-circle" onClick={()=>{handleMatch('W')}}>W</button>
                         </div>
     
                     </div>
@@ -217,7 +218,7 @@ const TrackerApp =({incrementRun,last ,DecrementRun, incrementBall, decrementBal
                             {
                                 stk.map((s)=>
                                 (
-                                    <div className="badge badge-info margin-1p">{s}</div>
+                                    <div className={`badge badge-${s} margin-1p`}>{s}</div>
                                 )
                                 )
                             }

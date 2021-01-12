@@ -13,3 +13,43 @@ body{
 .margin-1p{
   margin-left: 5px;
 }
+.badge-0 {
+  color: rgb(255, 255, 255);
+  background-color: #838282;
+}
+.badge-1 {
+  color: #fff;
+  background-color: #007bff;
+}
+.badge-wd {
+  color: #fff;
+  background-color: #ff5100;
+}
+.badge-2 {
+  color: #fff;
+  background-color: #28a745;
+}
+.badge-3 {
+  color: #212529;
+  background-color: #d39e00;
+}
+.badge-4 {
+  color: #fff;
+  background-color: #17a2b8;
+}
+.badge-5 {
+  color: #fff;
+  background-color: #212529;
+}
+.badge-NB {
+  color: #fff;
+  background-color: #dc3545;
+}
+.badge-W {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+.badge-6{
+  color: #fff;
+  background-color: dodgerblue;
+}
