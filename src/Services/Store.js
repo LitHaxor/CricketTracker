@@ -1,9 +1,16 @@
 import { createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import rootReducer from "./Reducer/index";
 
-import rootReducer from './Reducer/index';
+const persistConfig = {
+  key: "cricketRoot",
+  storage,
+};
 
-const initialState ={}
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore (rootReducer, initialState);
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
 
-export default store;
+export { store, persistor };
